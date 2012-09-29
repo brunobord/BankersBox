@@ -690,18 +690,6 @@
       return "OK";
     };
 
-    this.select = function(i) {
-      /*if (isNaN(parseInt(i, 10))) {
-        throw(new BankersBoxException("db index must be an integer"));
-      }
-      db = i;
-      prefix = "bb:" + i.toString() + ":";
-      keyskey = "bb:" + i.toString() + "k:___keys___";
-      */
-      keyskey = "___keys___";
-      keystore = get_raw_value(keyskey, "set") || {};
-    };
-
     var keystore = get_raw_value(keyskey, "set") || {};
 
   }; /* end constructor */
