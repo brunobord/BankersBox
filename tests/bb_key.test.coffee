@@ -4,18 +4,18 @@ assert = require "assert"
 ### KEY TESTS ###
 
 exports.testExistsFalse = ->
-  bb = new BankersBox(1)
+  bb = new BankersBox()
   bb.flushdb()
   assert.equal bb.exists("foo"), false, "key exists is false"
 
 exports.testExistsTrue = ->
-  bb = new BankersBox(1)
+  bb = new BankersBox()
   bb.flushdb()
   bb.set "foo", "bar"
   assert.equal bb.exists("foo"), true, "key exists is true"
 
 exports.testDelKey = ->
-  bb = new BankersBox(1)
+  bb = new BankersBox()
   bb.flushdb()
   bb.set "foo", "bar"
   assert.equal bb.exists("foo"), true, "test del key exists"
@@ -24,7 +24,7 @@ exports.testDelKey = ->
   assert.equal bb.exists("foo"), false, "test del key exists"
 
 exports.testDelReturn = ->
-  bb = new BankersBox(1)
+  bb = new BankersBox()
   bb.flushdb()
   bb.set "foo", "bar"
   assert.equal bb.del("foo"), 1, "test del return is 1"

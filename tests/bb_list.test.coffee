@@ -4,40 +4,40 @@ assert = require "assert"
 ### LIST TESTS ###
 
 exports.testTypeList = ->
-  bb = new BankersBox(1)
+  bb = new BankersBox()
   bb.flushdb()
   bb.lpush "mylist", "a"
   assert.equal bb.type("mylist"), "list", "test list type"
 
 exports.testLpushNewKey = ->
-  bb = new BankersBox(1)
+  bb = new BankersBox()
   bb.flushdb()
   assert.eql bb.lpush("mylist", "apple"), 1, "test lpush new key"
 
 exports.testLpushExistingKey = ->
-  bb = new BankersBox(1)
+  bb = new BankersBox()
   bb.flushdb()
   bb.lpush "mylist", "apple"
   assert.eql bb.lpush("mylist", "banana"), 2, "test lpush existing key"
 
 exports.testRpushNewKey = ->
-  bb = new BankersBox(1)
+  bb = new BankersBox()
   bb.flushdb()
   assert.eql bb.rpush("mylist", "apple"), 1, "test rpush new key"
 
 exports.testRpushExistingKey = ->
-  bb = new BankersBox(1)
+  bb = new BankersBox()
   bb.flushdb()
   bb.rpush "mylist", "apple"
   assert.eql bb.rpush("mylist", "banana"), 2, "test rpush existing key"
 
 exports.testLrangeNonKey = ->
-  bb = new BankersBox(1)
+  bb = new BankersBox()
   bb.flushdb()
   assert.eql bb.lrange("keydoesnotexist", 0, -1), [], "test lrange non existant key"
 
 exports.testLrangeKey = ->
-  bb = new BankersBox(1)
+  bb = new BankersBox()
   bb.flushdb()
   bb.lpush "mylist", "a"
   bb.lpush "mylist", "b"
@@ -52,12 +52,12 @@ exports.testLrangeKey = ->
   assert.eql bb.lrange("mylist", 5, 10), [], "test lrange 7"
 
 exports.testLlenNonKey = ->
-  bb = new BankersBox(1)
+  bb = new BankersBox()
   bb.flushdb()
   assert.equal bb.llen("mylist"), 0, "test llen non existent key"
 
 exports.testLlen = ->
-  bb = new BankersBox(1)
+  bb = new BankersBox()
   bb.flushdb()
   assert.equal bb.llen("mylist"), 0, "test llen 0"
   bb.lpush "mylist", "a"
@@ -70,34 +70,34 @@ exports.testLlen = ->
   assert.equal bb.llen("mylist"), 4, "test llen 4"
 
 exports.testLpushxNonKey = ->
-  bb = new BankersBox(1)
+  bb = new BankersBox()
   bb.flushdb()
   assert.equal bb.lpushx("mylist", "foo"), 0, "test lpushx non existent key"
 
 exports.testLpushxKey = ->
-  bb = new BankersBox(1)
+  bb = new BankersBox()
   bb.flushdb()
   bb.lpush "mylist", "apple"
   assert.equal bb.lpushx("mylist", "banana"), 2, "test lpushx on existing key"
 
 exports.testRpushxNonKey = ->
-  bb = new BankersBox(1)
+  bb = new BankersBox()
   bb.flushdb()
   assert.equal bb.rpushx("mylist", "foo"), 0, "test rpushx non existent key"
 
 exports.testRpushxKey = ->
-  bb = new BankersBox(1)
+  bb = new BankersBox()
   bb.flushdb()
   bb.lpush "mylist", "apple"
   assert.equal bb.rpushx("mylist", "banana"), 2, "test rpushx on existing key"
 
 exports.testLindexNonKey = ->
-  bb = new BankersBox(1)
+  bb = new BankersBox()
   bb.flushdb()
   assert.equal bb.lindex("mylist", 0), null, "test lindex non existent key"
 
 exports.testLindex = ->
-  bb = new BankersBox(1)
+  bb = new BankersBox()
   bb.flushdb()
   bb.lpush "mylist", "a"
   bb.lpush "mylist", "b"
@@ -115,12 +115,12 @@ exports.testLindex = ->
   assert.equal bb.lindex("mylist", -5), null, "test lindex -5"
 
 exports.testLpopNonKey = ->
-  bb = new BankersBox(1)
+  bb = new BankersBox()
   bb.flushdb()
   assert.equal bb.lpop("mylist"), null, "test lpop non existent key"
 
 exports.testLpopKey = ->
-  bb = new BankersBox(1)
+  bb = new BankersBox()
   bb.flushdb()
   bb.lpush "mylist", "a"
   bb.lpush "mylist", "b"
@@ -130,12 +130,12 @@ exports.testLpopKey = ->
   assert.eql bb.lrange("mylist", 0, -1), ["a", "c", "d"], "test lpop remaining"
 
 exports.testRpopNonKey = ->
-  bb = new BankersBox(1)
+  bb = new BankersBox()
   bb.flushdb()
   assert.equal bb.rpop("mylist"), null, "test rpop non existent key"
 
 exports.testRpopKey = ->
-  bb = new BankersBox(1)
+  bb = new BankersBox()
   bb.flushdb()
   bb.lpush "mylist", "a"
   bb.lpush "mylist", "b"
@@ -145,7 +145,7 @@ exports.testRpopKey = ->
   assert.eql bb.lrange("mylist", 0, -1), ["b", "a", "c"], "test rpop remaining"
 
 exports.testLset = ->
-  bb = new BankersBox(1)
+  bb = new BankersBox()
   bb.flushdb()
   bb.lpush "mylist", "a"
   bb.lpush "mylist", "b"
@@ -158,12 +158,12 @@ exports.testLset = ->
   assert.eql bb.lrange("mylist", -1, -1), ["g"], "test lset remaining 2"
 
 exports.testLtrimNonKey = ->
-  bb = new BankersBox(1)
+  bb = new BankersBox()
   bb.flushdb()
   assert.equal bb.ltrim("mylist", 1, -1), "OK", "test ltrim non existent key"
 
 exports.testLtrim = ->
-  bb = new BankersBox(1)
+  bb = new BankersBox()
   bb.flushdb()
   bb.lpush "mylist", "a"
   bb.lpush "mylist", "b"
@@ -196,12 +196,12 @@ exports.testLtrim = ->
   assert.eql bb.lrange("mylist", 0, -1), [], "test ltrim remaining 6"
 
 exports.testLremNonKey = ->
-  bb = new BankersBox(1)
+  bb = new BankersBox()
   bb.flushdb()
   assert.equal bb.lrem("mylist", 0, "a"), 0, "test lrem non existent key"
 
 exports.testLrem = ->
-  bb = new BankersBox(1)
+  bb = new BankersBox()
   bb.flushdb()
   bb.rpush "mylist", "a"
   bb.rpush "mylist", "b"
@@ -234,7 +234,7 @@ exports.testLrem = ->
   assert.eql bb.lrange("mylist", 0, -1), ["a", "b", "a", "c", "d"], "test lrem -2 remaining"
 
 exports.testRpoplpush = ->
-  bb = new BankersBox(1)
+  bb = new BankersBox()
   bb.flushdb()
   # src exists, dst does not
   bb.rpush "mylist", "a"
@@ -275,7 +275,7 @@ exports.testRpoplpush = ->
   assert.eql bb.lrange("mylist", 0, -1), ["c", "a", "b"], "test rpoplpush mylist remaining"
 
 exports.testLpopEmptyListRemoved = ->
-  bb = new BankersBox(1)
+  bb = new BankersBox()
   bb.flushdb()
   bb.lpush "foo", "a"
   bb.lpush "foo", "b"
@@ -284,7 +284,7 @@ exports.testLpopEmptyListRemoved = ->
   assert.equal bb.exists("foo"), false, "test lpop empty list becomes deleted"
 
 exports.testRpopEmptyListRemoved = ->
-  bb = new BankersBox(1)
+  bb = new BankersBox()
   bb.flushdb()
   bb.rpush "foo", "a"
   bb.rpush "foo", "b"
@@ -293,7 +293,7 @@ exports.testRpopEmptyListRemoved = ->
   assert.equal bb.exists("foo"), false, "test rpop empty list becomes deleted"
 
 exports.testRpoplpushEmptyListRemoved = ->
-  bb = new BankersBox(1)
+  bb = new BankersBox()
   bb.flushdb()
   bb.lpush "foo", "a"
   bb.lpush "foo", "b"
@@ -302,7 +302,7 @@ exports.testRpoplpushEmptyListRemoved = ->
   assert.equal bb.exists("foo"), false, "test rpoplpush empty list becomes deleted"
 
 exports.testLtrimEmptyListRemoved = ->
-  bb = new BankersBox(1)
+  bb = new BankersBox()
   bb.flushdb()
   bb.lpush "mylist", "a"
   bb.lpush "mylist", "b"
@@ -321,7 +321,7 @@ exports.testLtrimEmptyListRemoved = ->
   assert.equal bb.exists("mylist"), false, "test ltrim out of range deletes key 2"
 
 exports.testLremEmptyListRemoved = ->
-  bb = new BankersBox(1)
+  bb = new BankersBox()
   bb.flushdb()
   bb.lpush "mylist", "a"
   bb.lpush "mylist", "a"

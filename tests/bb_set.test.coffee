@@ -2,29 +2,29 @@ assert = require "assert"
 { BankersBox } = require "bankersbox"
 
 exports.testTypeSet = ->
-  bb = new BankersBox(1)
+  bb = new BankersBox()
   bb.flushdb()
   bb.sadd "myset", "foo"
   assert.equal bb.type("myset"), "set", "test set type"
 
 exports.testSaddNewMember = ->
-  bb = new BankersBox(1)
+  bb = new BankersBox()
   bb.flushdb()
   assert.equal bb.sadd("foo", "bar"), 1, "test sadd new member"
 
 exports.testSaddExistingMember = ->
-  bb = new BankersBox(1)
+  bb = new BankersBox()
   bb.flushdb()
   bb.sadd "foo", "bar"
   assert.equal bb.sadd("foo", "bar"), 0, "test sadd existing member"
 
 exports.testScardNonKey = ->
-  bb = new BankersBox(1)
+  bb = new BankersBox()
   bb.flushdb()
   assert.equal bb.scard("myset"), 0, "test scard non existent key"
 
 exports.testScard = ->
-  bb = new BankersBox(1)
+  bb = new BankersBox()
   bb.flushdb()
   bb.sadd "myset", "a"
   bb.sadd "myset", "b"
@@ -32,12 +32,12 @@ exports.testScard = ->
   assert.equal bb.scard("myset"), 3, "test scard"
 
 exports.testSisimemberNonKey = ->
-  bb = new BankersBox(1)
+  bb = new BankersBox()
   bb.flushdb()
   assert.equal bb.sismember("myset", "foo"), false, "test sismember non existent key"
 
 exports.testSismemberTrue = ->
-  bb = new BankersBox(1)
+  bb = new BankersBox()
   bb.flushdb()
   bb.sadd "myset", "foo"
   bb.sadd "myset", "bar"
@@ -45,7 +45,7 @@ exports.testSismemberTrue = ->
   assert.equal bb.sismember("myset", "bar"), true, "test sismember true 2"
 
 exports.testSismemberTrue = ->
-  bb = new BankersBox(1)
+  bb = new BankersBox()
   bb.flushdb()
   bb.sadd "myset", "foo"
   bb.sadd "myset", "bar"
@@ -53,12 +53,12 @@ exports.testSismemberTrue = ->
   assert.equal bb.sismember("myset", "qux"), false, "test sismember false 2"
 
 exports.testSmembersNonKey = ->
-  bb = new BankersBox(1)
+  bb = new BankersBox()
   bb.flushdb()
   assert.eql bb.smembers("myset"), [], "test smemebers non existent key"
 
 exports.testSmembers = ->
-  bb = new BankersBox(1)
+  bb = new BankersBox()
   bb.flushdb()
   bb.sadd "myset", "a"
   bb.sadd "myset", "b"
@@ -70,7 +70,7 @@ exports.testSmembers = ->
   assert.includes ret, "c", "test smembers contains c"
 
 exports.testSmove = ->
-  bb = new BankersBox(1)
+  bb = new BankersBox()
   bb.flushdb()
   # src and dst don't exists
   assert.equal bb.smove("myset1", "myset2", "foo"), 0, "test smove 1"
@@ -123,12 +123,12 @@ exports.testSmove = ->
   assert.includes bb.smembers("myset2"), "d", "test smove 4 myset2 remaining d"
 
 exports.testSpopNonKey = ->
-  bb = new BankersBox(1)
+  bb = new BankersBox()
   bb.flushdb()
   assert.equal bb.spop("myset"), null, "test spop non existent key"
 
 exports.testSpop = ->
-  bb = new BankersBox(1)
+  bb = new BankersBox()
   bb.flushdb()
   bb.sadd "myset", "a"
   bb.sadd "myset", "b"
@@ -139,12 +139,12 @@ exports.testSpop = ->
   assert.equal bb.scard("myset"), 2, "test spop myset remaining length"
 
 exports.testSrandmemberNonKey = ->
-  bb = new BankersBox(1)
+  bb = new BankersBox()
   bb.flushdb()
   assert.equal bb.srandmember("myset"), null, "test srandmember non existent key"
 
 exports.testSrandmember = ->
-  bb = new BankersBox(1)
+  bb = new BankersBox()
   bb.flushdb()
   bb.sadd "myset", "a"
   bb.sadd "myset", "b"
@@ -155,12 +155,12 @@ exports.testSrandmember = ->
   assert.equal bb.scard("myset"), 3, "test srandmember myset remaining length"
 
 exports.testSremNonKey = ->
-  bb = new BankersBox(1)
+  bb = new BankersBox()
   bb.flushdb()
   assert.equal bb.srem("myset", "a"), 0, "test srem non existent key"
 
 exports.testSrem = ->
-  bb = new BankersBox(1)
+  bb = new BankersBox()
   bb.flushdb()
   bb.sadd "myset", "a"
   bb.sadd "myset", "b"
@@ -175,7 +175,7 @@ exports.testSrem = ->
 
 
 exports.testSremEmptySetRemovesKey = ->
-  bb = new BankersBox(1)
+  bb = new BankersBox()
   bb.flushdb()
   bb.sadd "foo", "a"
   bb.sadd "foo", "b"
@@ -184,7 +184,7 @@ exports.testSremEmptySetRemovesKey = ->
   assert.equal bb.exists("foo"), false, "test srem empty set deletes key"
 
 exports.testSpopEmptySetRemovesKey = ->
-  bb = new BankersBox(1)
+  bb = new BankersBox()
   bb.flushdb()
   bb.sadd "foo", "a"
   bb.sadd "foo", "b"
@@ -193,7 +193,7 @@ exports.testSpopEmptySetRemovesKey = ->
   assert.equal bb.exists("foo"), false, "test spop empty set deletes key"
 
 exports.testSmoveEmptySetRemovesKey = ->
-  bb = new BankersBox(1)
+  bb = new BankersBox()
   bb.flushdb()
   bb.sadd "foo", "a"
   bb.sadd "foo", "b"

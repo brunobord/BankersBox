@@ -2,7 +2,7 @@
  * @license MIT License
  *
  * Copyright (c) 2012 Twilio Inc.
- * 
+ *
  * Authors: Chad Etzel <chetzel@twilio.com>
  *
  * Permission is hereby granted, free of charge, to any person obtaining
@@ -67,18 +67,19 @@
     }
   };
 
-  var BB = function(dbi, opts) {
+  var BB = function(opts) {
 
-    if (isNaN(parseInt(dbi, 10))) {
+    /*if (isNaN(parseInt(dbi, 10))) {
       throw(new BankersBoxException("db index must be an integer"));
     }
     dbi = parseInt(dbi, 10);
+    */
 
     opts = opts || {};
 
     var self = this;
 
-    var db = dbi;
+    //var db = dbi;
     var adapter = opts.adapter;
 
     if (adapter === undefined) {
@@ -87,13 +88,17 @@
       adapter = new BankersBoxNullAdapter();
     }
 
-    var prefix = "bb:" + db.toString() + ":";
+    /*var prefix = "bb:" + db.toString() + ":";
     var keyskey = "bb:" + db.toString() + "k:___keys___";
+    */
+    var prefix = "";
+    var keyskey = "___keys___";
+
     var store = {};
 
-    this.toString = function() {
+    /*this.toString = function() {
       return "bb:" + db.toString();
-    };
+    };*/
 
     if (typeof(JSON) == 'undefined' && !(window.JSON && window.JSON.parse && window.JSON.stringify)) {
       throw("No JSON support detected. Please include a JSON module with 'parse' and 'stringify' functions.");
@@ -686,12 +691,14 @@
     };
 
     this.select = function(i) {
-      if (isNaN(parseInt(i, 10))) {
+      /*if (isNaN(parseInt(i, 10))) {
         throw(new BankersBoxException("db index must be an integer"));
       }
       db = i;
       prefix = "bb:" + i.toString() + ":";
       keyskey = "bb:" + i.toString() + "k:___keys___";
+      */
+      keyskey = "___keys___";
       keystore = get_raw_value(keyskey, "set") || {};
     };
 
