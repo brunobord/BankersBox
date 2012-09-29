@@ -1,12 +1,6 @@
 assert = require "assert"
 { BankersBox, BankersBoxException, BankersBoxKeyException } = require "bankersbox"
 
-# I tried to write a test for no JSON object, but it blows up the
-# testing framework, so I have to leave it out... boo
-#exports.testNoJSON = ->
-#  assert.throws (->
-#    `JSON = undefined;`
-#    bb = new BankersBox())
 
 exports.testWrongKeyTypes = ->
   bb = new BankersBox()
