@@ -2,6 +2,10 @@
 
 [![Build Status](https://secure.travis-ci.org/twilio/BankersBox.png)](http://travis-ci.org/twilio/BankersBox)
 
+**WARNING** This is my own personal fork, that removes the "select DB"
+related features. I just needed BankersBox to be mono-database, so
+this fork is **NOT** an enhancement, it does **LESS** than the original.
+
 A redis-like wrapper for javascript data storage using localStorage as
 the default persistent data-store.
 
