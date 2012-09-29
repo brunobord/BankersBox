@@ -1,6 +1,6 @@
 # BankersBox
 
-[![Build Status](https://secure.travis-ci.org/twilio/BankersBox.png)](http://travis-ci.org/twilio/BankersBox)
+[![Build Status](https://secure.travis-ci.org/brunobord/BankersBox.png)](http://travis-ci.org/brunobord/BankersBox)
 
 **WARNING** This is my own personal fork, that removes the "select DB"
 related features. I just needed BankersBox to be mono-database, so
